@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>EcoScope | AI Predictive Shield</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans h-screen overflow-hidden flex flex-col">
+
+    <!-- HEADER -->
+     <header class="h-16 glass-panel flex justify-between items-center px-6 z-50 border-b border-slate-200 shadow-sm">
+        <div class="flex items-center space-x-3">
+            <span class="text-2xl">🌍</span>
+            <h1 class="text-xl font-extrabold tracking-tight text-slate-800">EcoScope <span class="text-xs font-medium text-emerald-600 uppercase">Predictive Shield</span></h1>
+        </div>
+
+        <!-- TOGGLE MODE -->
+        <div class="flex bg-slate-100 rounded-full p-1 border border-slate-200">
+            <button id="btn-hydro" onclick="setMode('hydro')" class="px-5 py-1.5 rounded-full text-xs font-bold transition-all bg-blue-600 text-white shadow-md">
+                💧 HydroScope
+            </button>
+            <button id="btn-bio" onclick="setMode('bio')" class="px-5 py-1.5 rounded-full text-xs font-bold transition-all text-slate-500 hover:text-slate-800">
+                🌿 BioScope
+            </button>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <select id="horizon-select" class="bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs font-semibold text-slate-600 shadow-sm">
+                <option value="24">Prochaines 24h</option>
+                <option value="48">Prochaines 48h</option>
+            </select>
+            <div class="flex items-center space-x-2">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Live System</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="flex-1 relative">
+
+        <!-- SIDEBAR -->
+        <aside class="absolute left-6 top-6 bottom-6 w-[340px] glass-panel z-40 rounded-3xl p-6 shadow-2xl border border-white overflow-hidden flex flex-col">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-sm font-black tracking-tight">Tableau de Bord</h2>
+                <span class="text-[9px] uppercase font-bold text-slate-400 tracking-widest">LIVE</span>
+            </div>
+
+            <div class="space-y-4">
+                <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
+                    <p class="text-[10px] font-bold text-emerald-600 uppercase mb-1">Résumé Global</p>
+                    <p id="global-status" class="text-xs text-emerald-800 leading-relaxed">Chargement des données...</p>
+                </div>
+            </div>
+
+            <div class="mt-6 flex-1 overflow-auto pr-2">
+                <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Alertes Prioritaires</h3>
+                <div id="alerts-container" class="space-y-3">
+                    <!-- alerts injected by JS -->
+                </div>
+            </div>
+        </aside>
+
+        <!-- CARTE -->
+        <div id="map"></div>
+
+        <!-- PANEL DE DÉTAILS -->
+        <div id="detail-panel" class="hidden absolute right-6 top-6 bottom-6 w-[380px] glass-panel z-50 rounded-3xl p-8 shadow-2xl transition-all duration-500 border border-white">
+            <button onclick="closeDetails()" class="absolute top-4 right-5 text-slate-300 hover:text-slate-900 transition-colors text-xl">✕</button>
+            <div id="detail-content"></div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="h-10 bg-white border-t border-slate-100 flex justify-between items-center px-8 text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+        <div class="flex items-center space-x-2">
+            <span>© 2025 EcoScope AI</span>
+            <span class="text-slate-200">|</span>
+            <span>Sentinel-2 L2A Processing</span>
+        </div>
+        <div class="flex items-center space-x-6">
+            <div class="flex items-center space-x-2">
+                <span class="text-slate-300">Emissions:</span>
+                <span id="carbon-value" class="text-emerald-500">0.00021g CO2e</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <span class="text-slate-300">AI Model:</span>
+                <span class="text-blue-500 font-black italic tracking-tighter">MARIDA-RF-V2</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="{% static 'core/map.js' %}"></script>
+    <script src="{% static 'core/dashboard.js' %}"></script>
+</body>
+</html>

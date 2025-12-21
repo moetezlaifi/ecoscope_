@@ -35,4 +35,6 @@ class RiskSnapshot(models.Model):
     horizon_hours = models.IntegerField(default=24)
 
     water_risk = models.FloatField()  # 0..100 (ML probability * 100)
+    bio_risk = models.FloatField(default=0.0)
+    
     explain_json = models.JSONField(default=dict)

@@ -1,0 +1,39 @@
+/* Glass panel */
+.glass-panel{
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Map fill */
+#map{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+/* Scrollbar nicer */
+::-webkit-scrollbar{ width: 6px; }
+::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius: 999px; }
+::-webkit-scrollbar-track{ background: transparent; }
+
+/* Pulse for critical markers */
+.pulse-red{
+  position: relative;
+}
+.pulse-red::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:22px;
+  height:22px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background: rgba(239,68,68,0.20);
+  animation: pulse 1.2s infinite;
+}
+@keyframes pulse{
+  0%{ transform:translate(-50%,-50%) scale(0.6); opacity:0.7; }
+  100%{ transform:translate(-50%,-50%) scale(1.6); opacity:0; }
+}
