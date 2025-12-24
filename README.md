@@ -2,7 +2,7 @@
 
 EcoScope is a **CPU-only, zero-hardware AI platform** designed to **predict environmental risks** while keeping its **carbon footprint extremely low**.
 
-Built during a hackathon by **RevolTech**, EcoScope demonstrates that **impactful AI does not require heavy infrastructure, GPUs, or IoT devices**.
+Built during the Green AI hackathon by **RevolTech**, EcoScope demonstrates that **impactful AI does not require heavy infrastructure, GPUs, or IoT devices**.
 
 ---
 
